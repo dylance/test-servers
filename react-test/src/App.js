@@ -1,79 +1,71 @@
 import React, { Component } from 'react';
 import './App.css';
-import SearchResultModel from './models';
-import Spotify from 'spotify-web-api-js';
 
-const spotifyWebApi = new Spotify();
-let artistSearch = 'animals';
+import SpotifyWebApi from 'spotify-web-api-js';
+const spotifyApi = new SpotifyWebApi();
+
+let artistTest = 'coldplay yellow'
 
 export default class App extends Component {
   constructor(){
     super();
-
     const params = this.getHashParams();
+    const token = params.access_token;
+    if (token) {
+      spotifyApi.setAccessToken(token);
+    }
     this.state = {
-      loggedIn: params.access_token ? true : false,
-      searchResult: {
-        artist: '',
-        song: ''
+      loggedIn: token ? true : false,
+      nowPlaying: {
+        artist: 'Please enter a track',
+        song: '',
+        albumCover: ''
       }
     }
-    if (params.access_token){
-      spotifyWebApi.setAccessToken(params.access_token)
-    }
   }
-
   getHashParams() {
-  var hashParams = {};
-  var e, r = /([^&;=]+)=?([^&;]*)/g,
-      q = window.location.hash.substring(1);
-  while ( e = r.exec(q)) {
-     hashParams[e[1]] = decodeURIComponent(e[2]);
-  }
-  return hashParams;
+    var hashParams = {};
+    var e, r = /([^&;=]+)=?([^&;]*)/g,
+        q = window.location.hash.substring(1);
+    e = r.exec(q)
+    while (e) {
+       hashParams[e[1]] = decodeURIComponent(e[2]);
+       e = r.exec(q);
+    }
+    return hashParams;
   }
 
-  getSearchResult(){
-    SearchResultModel.artist(artistSearch)
-    .then((response) => {
-      this.setState({
-        searchResult: {
-          artist: response.item.name,
-          song: response.item.album.images[0].url
-        }
+  getNowPlaying(){
+    spotifyApi.searchTracks(artistTest)
+      .then((response) => {
+        this.setState({
+          nowPlaying: {
+            artist: response.tracks.items[0].artists[0].name,
+            song: response.tracks.items[0].name,
+            albumCover: ''
+          }
+        });
+        console.log(response)
       })
-    })
   }
-
-  // getSearchResult(){
-  //   spotifyWebApi.searchTracks('animal')
-  //   .then((response) => {
-  //     this.setState({
-  //       searchResult: {
-  //         artist: response.item.name,
-  //         song: response.item.album.images[0].url
-  //       }
-  //     })
-  //   })
-  // };
-
   render() {
     return (
       <div className="App">
-        <a href="http://localhost:8888/">
-          <button>Login with Spotify</button>
-        </a>
-        <div>Search Result: { this.state.searchResult.artist }</div>
+        <a href='http://localhost:8888' > Login to Spotify </a>
         <div>
-          {/* <img src={ this.state.SearchResult.image } style={ { width: 100 } } alt=""/> */}
+          Artist: { this.state.nowPlaying.artist }
         </div>
-        <button onClick={ () => this.getSearchResult() }>
-          Search
-        </button>
         <div>
-          <input type="text" placeholder="Search for a song.." />
-          <input type="button" value="Search" />
+          Song: { this.state.nowPlaying.song}
         </div>
+        <div>
+          <img src={this.state.nowPlaying.albumCover} style={{ height: 150 }} alt=""/>
+        </div>
+        { this.state.loggedIn &&
+          <button onClick={() => this.getNowPlaying()}>
+            Check Now Playing
+          </button>
+        }
       </div>
     );
   }
