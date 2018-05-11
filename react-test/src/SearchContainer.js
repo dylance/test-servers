@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import Search from './Search'
 import SearchButton from './SearchButton'
-// import axios from 'axios';
 
 import SpotifyWebApi from 'spotify-web-api-js';
 const spotifyApi = new SpotifyWebApi();
@@ -47,7 +46,7 @@ export default class SearchContainer extends Component {
           nowPlaying: {
             artist: response.tracks.items[0].artists[0].name,
             song: response.tracks.items[0].name,
-            albumCover: ''
+            albumCover: response.tracks.items[0].album.images[2].url
           }
         });
         console.log(response)
@@ -65,19 +64,14 @@ export default class SearchContainer extends Component {
 		return (
       <div className="App SearchContainer-border">
         <h3>Search Container Component</h3>
-        <Search />
-        <a href='http://localhost:8888' > Login to Spotify </a>
-        <div>
-          Artist: { this.state.nowPlaying.artist }
-        </div>
-        <div>
-          Song: { this.state.nowPlaying.song}
-        </div>
-        <div>
-          <img src={ this.state.nowPlaying.albumCover } style={{ height: 150 }} alt=""/>
-        </div>
+        <Search
+          artist={ this.state.nowPlaying.artist }
+          song={ this.state.nowPlaying.song }
+          albumImage={ this.state.nowPlaying.albumCover }
+
+        />
         <SearchButton
-          getNowPlaying={() => {this.getNowPlaying()}}
+          getNowPlaying={ () => { this.getNowPlaying() } }
         />
       </div>
 		)
