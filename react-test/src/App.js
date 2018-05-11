@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import './SearchContainer.css';
 import './Search.css';
+import './SearchButton.css';
 import SearchContainer from './SearchContainer'
 
 export default class App extends Component {

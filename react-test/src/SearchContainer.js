@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Search from './Search'
+import SearchButton from './SearchButton'
 // import axios from 'axios';
 
 import SpotifyWebApi from 'spotify-web-api-js';
@@ -75,12 +76,9 @@ export default class SearchContainer extends Component {
         <div>
           <img src={ this.state.nowPlaying.albumCover } style={{ height: 150 }} alt=""/>
         </div>
-        { this.state.loggedIn &&
-          <button onClick={ () => this.getNowPlaying() }>
-            Check Now Playing
-          </button>
-        }
-
+        <SearchButton
+          getNowPlaying={() => {this.getNowPlaying()}}
+        />
       </div>
 		)
 	}
