@@ -5,8 +5,7 @@ export default class Search extends Component {
 	render() {
 		return (
       <div className="App Search-border">
-        <h3> Search Component </h3>
-        <a href='http://localhost:8888' > Login to Spotify </a>
+        <h4> Search Component </h4>
         <div>
           Artist: { this.props.artist }
         </div>

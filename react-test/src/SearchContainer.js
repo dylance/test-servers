@@ -5,7 +5,7 @@ import SearchButton from './SearchButton'
 import SpotifyWebApi from 'spotify-web-api-js';
 const spotifyApi = new SpotifyWebApi();
 
-let artistTest = 'coldplay yellow'
+// let artistTest = 'coldplay yellow'
 
 export default class SearchContainer extends Component {
   constructor(){
@@ -18,6 +18,7 @@ export default class SearchContainer extends Component {
     }
     this.state = {
       loggedIn: token ? true : false,
+      searchInput: '',
       nowPlaying: {
         artist: 'Please enter a track',
         song: '',
@@ -39,8 +40,19 @@ export default class SearchContainer extends Component {
     return hashParams;
   }
 
-  getNowPlaying(){
-    spotifyApi.searchTracks(artistTest)
+  handleChange(e) {
+    this.setState({
+      searchInput: e.target.value,
+    });
+  }
+
+  handleSubmit(e) {
+    e.preventDefault();
+
+  }
+
+  getNowPlaying(e){
+    spotifyApi.searchTracks(this.state.searchInput)
       .then((response) => {
         this.setState({
           nowPlaying: {
@@ -64,14 +76,16 @@ export default class SearchContainer extends Component {
 		return (
       <div className="App SearchContainer-border">
         <h3>Search Container Component</h3>
+        <SearchButton
+          getNowPlaying={ (e) => { this.getNowPlaying(e) } }
+          handleChange={ (e) => { this.handleChange(e) } }
+          handleSubmit={ (e) => { this.handleSubmit(e) } }
+          searchQuery={ this.state.searchInput }
+        />
         <Search
           artist={ this.state.nowPlaying.artist }
           song={ this.state.nowPlaying.song }
           albumImage={ this.state.nowPlaying.albumCover }
-
-        />
-        <SearchButton
-          getNowPlaying={ () => { this.getNowPlaying() } }
         />
       </div>
 		)

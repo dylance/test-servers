@@ -11,6 +11,7 @@ export default class App extends Component {
     return (
       <div className="App App-border">
         <h1> Mixify </h1>
+        <a href='http://localhost:8888' > Login to Spotify </a>
         <SearchContainer />
       </div>
     );
