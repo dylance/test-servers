@@ -7,14 +7,14 @@ export default class Search extends Component {
       <div className="App Search-border">
         <h4> Search Component </h4>
         <div>
-          Artist: { this.props.artist }
+          { this.props.artist }
         </div>
-        <div>
+        {/* <div>
           Song: { this.props.song}
         </div>
         <div>
           <img src={ this.props.albumImage } style={{ height: 64 }} alt=""/>
-        </div>
+        </div> */}
      </div>
 		)
 	}

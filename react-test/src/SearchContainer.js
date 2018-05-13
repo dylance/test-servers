@@ -20,7 +20,7 @@ export default class SearchContainer extends Component {
       loggedIn: token ? true : false,
       searchInput: '',
       nowPlaying: {
-        artist: 'Please enter a track',
+        artist: '',
         song: '',
         albumCover: ''
       }
@@ -44,6 +44,7 @@ export default class SearchContainer extends Component {
     this.setState({
       searchInput: e.target.value,
     });
+    // console.log(e.target.value);
   }
 
   handleSubmit(e) {
@@ -56,9 +57,33 @@ export default class SearchContainer extends Component {
       .then((response) => {
         this.setState({
           nowPlaying: {
-            artist: response.tracks.items[0].artists[0].name,
-            song: response.tracks.items[0].name,
-            albumCover: response.tracks.items[0].album.images[2].url
+            // artist: response.tracks.items[0].artists[0].name,
+            artist: response.tracks.items.map((data) => {
+              return(
+                <div className="App Search-border">
+                  <div>
+                    Artist: { data.artists[0].name }
+                  </div>
+                  <div>
+                    Song: { data.name }
+                  </div>
+                  <div>
+                    <img src={ data.album.images[2].url } style={{ height: 64 }} alt=""/>
+                  </div>
+               </div>
+              )
+            }),
+            // song: response.tracks.items[0].name,
+            // song: response.tracks.items.map((data) => {
+            //   return(
+            //     <div className="App Search-border">
+            //       <div>
+            //         { data.name }
+            //       </div>
+            //    </div>
+            //   )
+            // }),
+            // albumCover: response.tracks.items[0].album.images[2].url
           }
         });
         console.log(response)
@@ -66,13 +91,6 @@ export default class SearchContainer extends Component {
   }
 
 	render() {
-		// let results;
-		// if (this.state.response) {
-    //   results = this.state.response.map((item,index) =>
-		// 	  <img key={index} src={item.images.fixed_height_small.url} alt="results" />
-		// 	)
-    // }
-
 		return (
       <div className="App SearchContainer-border">
         <h3>Search Container Component</h3>
