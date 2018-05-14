@@ -21,8 +21,8 @@ export default class SearchContainer extends Component {
       searchInput: '',
       nowPlaying: {
         artist: '',
-        song: '',
-        albumCover: ''
+        // song: '',
+        // albumCover: ''
       }
     }
     this.getNowPlaying = this.getNowPlaying.bind(this);
@@ -70,6 +70,12 @@ export default class SearchContainer extends Component {
                   <div>
                     <img src={ data.album.images[2].url } style={{ height: 64 }} alt=""/>
                   </div>
+                  <button onClick={ this.addSong }>
+                    Add
+                  </button>
+                  <div>
+                    Spotify ID: { data.id }
+                  </div>
                </div>
               )
             }),
@@ -90,6 +96,11 @@ export default class SearchContainer extends Component {
       })
   }
 
+  addSong() {
+    // e.preventDefault();
+    console.log('woop')
+  }
+
 	render() {
 		return (
       <div className="App SearchContainer-border">
@@ -102,8 +113,9 @@ export default class SearchContainer extends Component {
         />
         <Search
           artist={ this.state.nowPlaying.artist }
-          song={ this.state.nowPlaying.song }
-          albumImage={ this.state.nowPlaying.albumCover }
+          // song={ this.state.nowPlaying.song }
+          // albumImage={ this.state.nowPlaying.albumCover }
+          addSong={ (e) => { this.addSong(e) } }
         />
       </div>
 		)

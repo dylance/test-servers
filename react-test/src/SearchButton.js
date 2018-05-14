@@ -6,7 +6,7 @@ export default class SearchButton extends Component {
 		return (
       <div className="App SearchButton-border">
         <h4> Search Button Component </h4>
-        <form onSubmit={ this.props.handleSubmit }>
+        <form>
           <input
             type="text"
             placeholder="Enter Song Title.."

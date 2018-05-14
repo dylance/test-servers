@@ -9,6 +9,7 @@ export default class Search extends Component {
         <div>
           { this.props.artist }
         </div>
+
         {/* <div>
           Song: { this.props.song}
         </div>
