@@ -23,7 +23,8 @@ export default class SearchContainer extends Component {
         artist: '',
         // song: '',
         // albumCover: ''
-      }
+      },
+      playlist: '',
     }
     this.getNowPlaying = this.getNowPlaying.bind(this);
   }
@@ -68,7 +69,7 @@ export default class SearchContainer extends Component {
                     Song: { data.name }
                   </div>
                   <div>
-                    <img src={ data.album.images[2].url } style={{ height: 64 }} alt=""/>
+                    <img src={ data.album.images[2].url } style={ { height: 64 } } alt=""/>
                   </div>
                   <button onClick={ () => { this.addSong(data.id )} }>
                     Add
@@ -97,8 +98,12 @@ export default class SearchContainer extends Component {
   }
 
   addSong(data) {
-    // e.preventDefault();
-    console.log(data)
+    spotifyApi.getTrack(data)
+      .then((response) => {
+        this.setState({
+          playlist: console.log(response)
+        })
+      })
   }
 
 	render() {
