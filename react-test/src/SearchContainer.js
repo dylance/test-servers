@@ -68,9 +68,9 @@ export default class SearchContainer extends Component {
                     Song: { data.name }
                   </div>
                   <div>
-                    <img src={ data.album.images[0].url } style={ { height: 150 } } alt=""/>
+                    <img src={ data.album.images[2].url } style={{ height: 64 }} alt=""/>
                   </div>
-                  <button onClick={ this.addSong(e) }>
+                  <button onClick={ () => { this.addSong(data.id )} }>
                     Add
                   </button>
                   <div>
@@ -96,9 +96,9 @@ export default class SearchContainer extends Component {
       })
   }
 
-  addSong(e) {
+  addSong(data) {
     // e.preventDefault();
-    console.log('poo')
+    console.log(data)
   }
 
 	render() {
