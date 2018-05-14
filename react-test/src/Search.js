@@ -7,7 +7,7 @@ export default class Search extends Component {
       <div className="App Search-border">
         <h4> Search Component </h4>
         <div>
-          { this.props.artist }
+          { console.log(this.props.artist) }
         </div>
 
         {/* <div>

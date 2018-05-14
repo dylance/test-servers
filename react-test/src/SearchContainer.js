@@ -58,27 +58,28 @@ export default class SearchContainer extends Component {
         this.setState({
           nowPlaying: {
             // artist: response.tracks.items[0].artists[0].name,
-            artist: response.tracks.items.map((data) => {
-              return(
-                <div className="App Search-border">
-                  <div>
-                    Artist: { data.artists[0].name }
-                  </div>
-                  <div>
-                    Song: { data.name }
-                  </div>
-                  <div>
-                    <img src={ data.album.images[0].url } style={ { height: 150 } } alt=""/>
-                  </div>
-                  <button onClick={ this.addSong }>
-                    Add
-                  </button>
-                  <div>
-                    Spotify ID: { data.id }
-                  </div>
-               </div>
-              )
-            }),
+            artist: response.tracks.items
+            // artist: response.tracks.items.map((data) => {
+            //   return(
+            //     <div className="App Search-border">
+            //       <div>
+            //         Artist: { data.artists[0].name }
+            //       </div>
+            //       <div>
+            //         Song: { data.name }
+            //       </div>
+            //       <div>
+            //         <img src={ data.album.images[0].url } style={ { height: 150 } } alt=""/>
+            //       </div>
+            //       <button onClick={ this.addSong }>
+            //         Add
+            //       </button>
+            //       <div>
+            //         Spotify ID: { data.id }
+            //       </div>
+            //    </div>
+            //   )
+            // }),
             // song: response.tracks.items[0].name,
             // song: response.tracks.items.map((data) => {
             //   return(
