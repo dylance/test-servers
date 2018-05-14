@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Search from './Search'
 import SearchButton from './SearchButton'
+import Playlist from './Playlist'
 
 import SpotifyWebApi from 'spotify-web-api-js';
 const spotifyApi = new SpotifyWebApi();
@@ -24,11 +25,7 @@ export default class SearchContainer extends Component {
         // song: '',
         // albumCover: ''
       },
-      playlist: {
-        artistPl: '',
-        songPl: '',
-        albumCoverPl: ''
-      },
+      playlist: []
     }
     this.getNowPlaying = this.getNowPlaying.bind(this);
   }
@@ -78,9 +75,7 @@ export default class SearchContainer extends Component {
                   <button onClick={ () => { this.addSong(data.id) } }>
                     Add
                   </button>
-                  <div>
-                    Spotify ID: { data.id }
-                  </div>
+
                </div>
               )
             }),
@@ -131,6 +126,7 @@ export default class SearchContainer extends Component {
           // albumImage={ this.state.nowPlaying.albumCover }
           addSong={ (e) => { this.addSong(e) } }
         />
+        <Playlist />
       </div>
 		)
 	}
