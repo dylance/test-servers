@@ -75,7 +75,9 @@ export default class SearchContainer extends Component {
                   <button onClick={ () => { this.addSong(data.id) } }>
                     Add
                   </button>
-
+                  <div>
+                    Spotify ID: { data.id }
+                  </div>
                </div>
               )
             }),
@@ -99,14 +101,8 @@ export default class SearchContainer extends Component {
   addSong(data) {
     spotifyApi.getTrack(data)
       .then((response) => {
-        this.setState({
-          playlist: {
-            artistPl: response.artists[0].name,
-            songPl: response.name,
-            albumCoverPl: response.album.images[0].url
-          },
-        })
-        console.log(response)
+        this.state.playlist.push(response)
+        console.log(this.state.playlist)
       })
   }
 
