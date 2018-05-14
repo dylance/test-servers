@@ -1,8 +1,9 @@
 <!doctype html>
 <html>
   <head>
-    <title>Example of the Authorization Code flow with Spotify</title>
+    <title>Mixify</title>
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/styles.css">
     <style type="text/css">
       #login, #loggedin {
         display: none;
@@ -19,15 +20,16 @@
   <body>
     <div class="container">
       <div id="login">
-        <h1>This is an example of the Authorization Code flow</h1>
-        <a href="/login" class="btn btn-primary">Log in with Spotify</a>
+        <h1 id="padding">Welcome!</h1>
+        <h4 id="padding">Please log in with your spotify account.</h4>
+        <a href="/login" class="btn btn-primary" id="button" >Log in with Spotify</a>
       </div>
       <div id="loggedin">
         <div id="user-profile">
         </div>
         <div id="oauth">
         </div>
-        <button class="btn btn-default" id="obtain-new-token">Obtain new token using the refresh token</button>
+        <button class="btn btn-default" id="obtain-new-token"  >Obtain new token using the refresh token</button>
       </div>
     </div>
 
@@ -139,4 +141,3 @@
     </script>
   </body>
 </html>
-

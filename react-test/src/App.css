@@ -31,6 +31,25 @@ div, button {
   margin: 15px;
 }
 
-.App-border {
-  background-color: rgba(240, 240, 240, 1);
+.nav-left-margin {
+  margin-left: 100px;
 }
+
+.search-button {
+  border: solid 1px black;
+  border-radius: 25px;
+  padding: 0 24px;
+}
+
+.search-button:hover {
+  background: black;
+  color: white;
+}
+
+.a:hover {
+  color: white;
+}
+
+/* .App-border {
+  background-color: rgba(240, 240, 240, 1);
+} */
