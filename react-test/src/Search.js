@@ -4,8 +4,8 @@ export default class Search extends Component {
 
 	render() {
 		return (
-      <div className="App Search-border">
-        <h4> Search Component </h4>
+      <div className="App">
+        {/* <h4> Search Component </h4> */}
         <div>
           { this.props.artist }
         </div>

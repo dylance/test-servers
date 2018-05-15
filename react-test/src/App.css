@@ -42,12 +42,16 @@ div, button {
 }
 
 .search-button:hover {
-  background: black;
-  color: white;
+  background: white;
+  border: solid 1px white;
 }
 
-.a:hover {
-  color: white;
+.bg-clear {
+  background-color: pink;
+}
+
+.text-black {
+  color: black;
 }
 
 /* .App-border {

@@ -7,6 +7,7 @@ import SpotifyWebApi from 'spotify-web-api-js';
 const spotifyApi = new SpotifyWebApi();
 
 // let artistTest = 'coldplay yellow'
+let array = [];
 
 export default class SearchContainer extends Component {
   constructor(){
@@ -71,7 +72,7 @@ export default class SearchContainer extends Component {
                     Song: { data.name }
                   </div>
                   <div>
-                    <img src={ data.album.images[2].url } style={ { height: 64 } } alt=""/>
+                    <img src={ data.album.images[2].url } style={ { height: 150 } } alt=""/>
                   </div>
                   <button onClick={ () => { this.addSong(data.id) } }>
                     Add
@@ -102,15 +103,16 @@ export default class SearchContainer extends Component {
   addSong(data) {
     spotifyApi.getTrack(data)
       .then((response) => {
-        this.state.playlist.push(response)
-        console.log(this.state.playlist)
+
+        array.push(response)
+        console.log(array)
       })
   }
 
 	render() {
 		return (
-      <div className="App SearchContainer-border">
-        <h3>Search Container Component</h3>
+      <div className="App">
+        {/* <h3>Search Container Component</h3> */}
         <SearchButton
           getNowPlaying={ (e) => { this.getNowPlaying(e) } }
           handleChange={ (e) => { this.handleChange(e) } }
@@ -123,7 +125,7 @@ export default class SearchContainer extends Component {
           // albumImage={ this.state.nowPlaying.albumCover }
           addSong={ (e) => { this.addSong(e) } }
         />
-        <Playlist list= {this.state.playlist} />
+        <Playlist list= {array} />
       </div>
 		)
 	}
