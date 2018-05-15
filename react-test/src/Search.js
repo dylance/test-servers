@@ -6,9 +6,9 @@ export default class Search extends Component {
 		return (
       <div className="App">
         {/* <h4> Search Component </h4> */}
-        <div>
+
           { this.props.artist }
-        </div>
+
         {/* <div>
           Song: { this.props.song}
         </div>
