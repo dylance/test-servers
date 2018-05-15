@@ -28,6 +28,7 @@ export default class SearchContainer extends Component {
       playlist: []
     }
     this.getNowPlaying = this.getNowPlaying.bind(this);
+    this.addSong = this.addSong.bind(this);
   }
 
   getHashParams() {
@@ -122,7 +123,7 @@ export default class SearchContainer extends Component {
           // albumImage={ this.state.nowPlaying.albumCover }
           addSong={ (e) => { this.addSong(e) } }
         />
-        <Playlist />
+        <Playlist list= {this.state.playlist} />
       </div>
 		)
 	}
