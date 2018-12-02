@@ -1,13 +1,17 @@
 const express = require('express'); // Express web server framework
 const request = require('request'); // "Request" library
+const passport = require('passport');
+const SpotifyStrategy = require('passport-spotify').Strategy
+
 const querystring = require('querystring');
 const cookieParser = require('cookie-parser');
-const generateRandomString = require("./utility/generateRandomString")
+const generateRandomString = require("./utility/generateRandomString");
+
+const keys = require('./config/keys');
 
 // const client_id = 'a829d5c8ef3944eba13ddea08af2dd7d'; // Your client id
 // const client_secret = '695d8bfef5fb46dd9ce8a9e9420f1159'; // Your secret
-const client_id = '585d21b1c3bc41b496e79aa1e55c527f'; // Your client id
-const client_secret = '724e0f80066444e99bb9a149674a531c'; // Your secret
+
 const redirect_uri = 'http://localhost:3000/callback'; // Your redirect uri
 const stateKey = 'spotify_auth_state';
 
@@ -28,7 +32,7 @@ app.get('/login', function(req, res) {
   res.redirect('https://accounts.spotify.com/authorize?' +
     querystring.stringify({
       response_type: 'code',
-      client_id: client_id,
+      client_id: keys.spotifyClientID,
       scope: scope,
       redirect_uri: redirect_uri,
       state: state
@@ -59,7 +63,7 @@ app.get('/callback', function(req, res) {
         grant_type: 'authorization_code'
       },
       headers: {
-        'Authorization': 'Basic ' + (new Buffer(client_id + ':' + client_secret).toString('base64'))
+        'Authorization': 'Basic ' + (new Buffer(keys.spotifyClientID + ':' + keys.spotifyClientSecret).toString('base64'))
       },
       json: true
     };
@@ -103,7 +107,7 @@ app.get('/refresh_token', function(req, res) {
   var refresh_token = req.query.refresh_token;
   var authOptions = {
     url: 'https://accounts.spotify.com/api/token',
-    headers: { 'Authorization': 'Basic ' + (new Buffer(client_id + ':' + client_secret).toString('base64')) },
+    headers: { 'Authorization': 'Basic ' + (new Buffer(keys.spotifyClientID + ':' + client_secret).toString('base64')) },
     form: {
       grant_type: 'refresh_token',
       refresh_token: refresh_token
