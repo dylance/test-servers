@@ -4,13 +4,16 @@ const querystring = require('querystring');
 const cookieParser = require('cookie-parser');
 const generateRandomString = require("./utility/generateRandomString")
 
-const client_id = 'a829d5c8ef3944eba13ddea08af2dd7d'; // Your client id
-const client_secret = '695d8bfef5fb46dd9ce8a9e9420f1159'; // Your secret
-const redirect_uri = 'http://localhost:8888/callback'; // Your redirect uri
+// const client_id = 'a829d5c8ef3944eba13ddea08af2dd7d'; // Your client id
+// const client_secret = '695d8bfef5fb46dd9ce8a9e9420f1159'; // Your secret
+const client_id = '585d21b1c3bc41b496e79aa1e55c527f'; // Your client id
+const client_secret = '724e0f80066444e99bb9a149674a531c'; // Your secret
+const redirect_uri = 'http://localhost:3000/callback'; // Your redirect uri
+const stateKey = 'spotify_auth_state';
 
 const app = express();
 
-const stateKey = 'spotify_auth_state';
+
 
 app.use(express.static(__dirname + '/public'))
    .use(cookieParser());
@@ -117,6 +120,10 @@ app.get('/refresh_token', function(req, res) {
     }
   });
 });
+
+app.get('/what', (req, res) => {
+  res.send("this worked")
+})
 
 const PORT = process.env.PORT || 8888;
 app.listen(PORT, () => {
